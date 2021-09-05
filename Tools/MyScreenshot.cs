@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace draft.Tools
+namespace Rimi.Tools
 {
     public class MyScreenshot
     {

@@ -2,7 +2,7 @@
 
 using NUnit.Framework;
 
-namespace draft.Test
+namespace Rimi.Test
 {
     class BasicCheckBoxTest : BaseTest
     {

@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 
-namespace draft.Page
+namespace Rimi.Page
 {
     public class BasicCheckBoxPage : BasePage
     {

@@ -3,7 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using System;
 
-namespace draft.Drivers
+namespace Rimi.Drivers
 
 {
     public class CustomDriver

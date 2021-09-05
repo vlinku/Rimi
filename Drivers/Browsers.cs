@@ -1,4 +1,4 @@
-﻿namespace draft.Drivers
+﻿namespace Rimi.Drivers
 {
     enum Browsers
     {
