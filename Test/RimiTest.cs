@@ -23,12 +23,8 @@ namespace Rimi.Test
       _rimiHomePage.CloseCookies();
       _rimiParduotuvePage.SelectParduotuves();
       _rimiParduotuvePage.IeskotiParduotuves("Kaunas");
+      _rimiParduotuvePage.CheckShop("Rimi Prancūzų");
       
-
-
-
-
-
     }
 
   }

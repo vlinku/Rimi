@@ -29,14 +29,15 @@ namespace Rimi.Page
       cookieButton.Click();
     }
 
+    
+    public void Patikrinti9Taisykle(string result)
+    {
+      Assert.IsTrue(Korteles9Taisykle.Text.Contains(result) , "Rule is incorrect!");
+    }
     public void PasirinktiDaugiauMygtuka()
     {
       SelectDaugiau.Click();
       SelectDovanuKortele.Click();
-    }
-    public void Patikrinti9Taisykle(string result)
-    {
-      Assert.IsTrue(Korteles9Taisykle.Text.Contains(result), "Rule is incorrect!");
     }
   }
 }
