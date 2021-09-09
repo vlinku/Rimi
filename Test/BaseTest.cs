@@ -15,6 +15,8 @@ namespace Rimi.Test
     public static BasicCheckBoxPage _page;
     public static RimiHomePage _rimiHomePage;
     public static RimiParduotuvePage _rimiParduotuvePage;
+    public static RimiEShopPricePage _rimiEShopPricePage;
+    public static RimiMilkPricePage _rimiMilkPricePage;
 
 
     [OneTimeSetUp]
@@ -23,6 +25,9 @@ namespace Rimi.Test
       driver = CustomDriver.GetChromeDriver();
       _rimiHomePage = new RimiHomePage(driver);
       _rimiParduotuvePage = new RimiParduotuvePage(driver);
+      _rimiEShopPricePage = new RimiEShopPricePage(driver);
+      _rimiMilkPricePage = new RimiMilkPricePage(driver);
+
     }
 
     [TearDown]

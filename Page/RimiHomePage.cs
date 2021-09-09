@@ -8,11 +8,12 @@ namespace Rimi.Page
   {
     private const string PageAddress = "https://www.rimi.lt/";
     private IWebElement cookieButton => Driver.FindElement(By.Id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"));
-    private IWebElement SelectDaugiau => Driver.FindElement(By.XPath("/html/body/header/div[1]/div/div/div[2]/ul/li[1]/div"));
+    private IWebElement SelectDaugiau => Driver.FindElement(By.XPath("//html/body/header/div[1]/div/div/div[2]/ul/li[1]/div"));
     private IWebElement SelectDovanuKortele => Driver.FindElement(By.XPath("/html/body/header/div[1]/div/div/div[2]/ul/li[1]/ul/li[2]"));
 
     private IWebElement Korteles9Taisykle => Driver.FindElement(By.XPath("/html/body/main/section/div/div/div/ol/li[9]"));
-    
+
+    private IWebElement EShop => Driver.FindElement(By.CssSelector(".header__ecom-link.gtm"));
 
     public RimiHomePage(IWebDriver webdriver) : base(webdriver) { }
 
@@ -39,5 +40,11 @@ namespace Rimi.Page
       SelectDaugiau.Click();
       SelectDovanuKortele.Click();
     }
+
+    public void NavigateToEShop() 
+    {
+      EShop.Click(); 
+    }
+
   }
 }

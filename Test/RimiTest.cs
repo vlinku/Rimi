@@ -27,5 +27,30 @@ namespace Rimi.Test
       
     }
 
+    [Test]
+    public static void RimiProductPrice ()
+    {
+      _rimiHomePage.NavigateToPage();
+      _rimiHomePage.CloseCookies();
+      _rimiHomePage.NavigateToEShop();
+      _rimiEShopPricePage.stayOnPage();
+     _rimiEShopPricePage.EShopSearch("Pienas");
+
+    }
+
+    [Test]
+
+    public static void RimiMilkPriceCheck ()
+    {
+      _rimiHomePage.NavigateToPage();
+      _rimiHomePage.CloseCookies();
+      _rimiMilkPricePage.RimiSearchProductOpen();
+      _rimiMilkPricePage.RimiSearch("Pienas");
+      _rimiMilkPricePage.MilkSelect();
+      _rimiMilkPricePage.FirstMilkSelectionGrid();
+
+    }
+
+
   }
 }
