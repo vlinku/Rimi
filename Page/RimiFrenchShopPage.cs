@@ -10,16 +10,12 @@ namespace Rimi.Page
 {
   public class RimiFrenchShopPage : BasePage
   {
-
     private IWebElement ShopsButton => Driver.FindElement(By.XPath("/html/body/header/div[1]/div/div/div[2]/ul/li[4]"));
     private IWebElement ShopsSearchField => Driver.FindElement(By.CssSelector(".form-field__input.js-shops-autocomplete.tt-input"));
     private IWebElement ClickAnywhere => Driver.FindElement(By.XPath("//html"));
-
-
     IReadOnlyCollection<IWebElement> shopResults => Driver.FindElements(By.CssSelector(".shop.js-shop-item"));
 
     public RimiFrenchShopPage(IWebDriver webdriver) : base(webdriver) { }
-
 
     public void SelectShops()
     {
@@ -33,14 +29,12 @@ namespace Rimi.Page
       Actions PressEnter = new Actions(Driver);
       PressEnter.SendKeys(Keys.Enter);
       PressEnter.Build().Perform();
-
     }
 
     public void CheckShop(string shop)
     {
       ClickAnywhere.Click();
       GetWait().Until(ExpectedConditions.StalenessOf(shopResults.ElementAt(0)));
-     // GetWait().Until(ExpectedConditions.ElementToBeClickable(shopResults.ElementAt(0)));
       IWebElement firstShopResult = shopResults.ElementAt(0);
       string firstShopResultSelected = firstShopResult.FindElement(By.CssSelector(".shop__top > a")).Text;
       Assert.AreEqual(shop, firstShopResultSelected.Replace("„", "").Replace("“", ""), "Shop names do not match");

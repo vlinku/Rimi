@@ -15,10 +15,8 @@ namespace Rimi.Page
     private IWebElement RimiSearchMilk => Driver.FindElement(By.Id("header_search_query"));
     IReadOnlyCollection<IWebElement> MilkResults => Driver.FindElements(By.CssSelector(".search-results__item"));
     IWebElement firstResult => MilkResults.ElementAt(0).FindElement(By.CssSelector(".search-results__link"));
-
     IReadOnlyCollection<IWebElement> MilkSelectionGrid => Driver.FindElements(By.CssSelector(".product-grid__item"));
     IWebElement firstSelectionResult => MilkSelectionGrid.ElementAt(0).FindElement(By.CssSelector(".card__url.js-gtm-eec-product-click"));
-
     private string EurosPrice => Driver.FindElement(By.CssSelector(".price > span")).Text;
     private string EuroCentsPrice => Driver.FindElement(By.CssSelector(".price > div > sup")).Text;
 
@@ -55,7 +53,6 @@ namespace Rimi.Page
       Assert.IsTrue(Euro > Int32.Parse(EurosPrice), "Euro price do not match");
       Assert.IsTrue(Cents > Int32.Parse(EuroCentsPrice), "Euro cents price do not match");
     }
-
 
   }
 }
