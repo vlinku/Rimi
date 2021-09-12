@@ -1,6 +1,4 @@
-﻿
-
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using Rimi.Drivers;
@@ -11,22 +9,23 @@ namespace Rimi.Test
 {
   public class BaseTest
   {
-    public static IWebDriver driver;
-    public static BasicCheckBoxPage _page;
+    public static IWebDriver Driver;
     public static RimiHomePage _rimiHomePage;
-    public static RimiParduotuvePage _rimiParduotuvePage;
-    public static RimiEShopPricePage _rimiEShopPricePage;
+    public static RimiFrenchShopPage _rimiParduotuvePage;
+    public static RimiEShopBreadPage _rimiEShopPricePage;
     public static RimiMilkPricePage _rimiMilkPricePage;
+    public static RimiEShopDropDownList _rimiEShopProducList;
 
 
     [OneTimeSetUp]
     public static void SetUp()
     {
-      driver = CustomDriver.GetChromeDriver();
-      _rimiHomePage = new RimiHomePage(driver);
-      _rimiParduotuvePage = new RimiParduotuvePage(driver);
-      _rimiEShopPricePage = new RimiEShopPricePage(driver);
-      _rimiMilkPricePage = new RimiMilkPricePage(driver);
+      Driver = CustomDriver.GetChromeDriver();
+      _rimiHomePage = new RimiHomePage(Driver);
+      _rimiParduotuvePage = new RimiFrenchShopPage(Driver);
+      _rimiEShopPricePage = new RimiEShopBreadPage(Driver);
+      _rimiMilkPricePage = new RimiMilkPricePage(Driver);
+      _rimiEShopProducList = new RimiEShopDropDownList(Driver);
 
     }
 
@@ -34,14 +33,14 @@ namespace Rimi.Test
     public static void TakeScreeshot()
     {
       if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
-        MyScreenshot.MakeScreeshot(driver);
+        MyScreenshot.MakeScreeshot(Driver);
     }
 
-    //[OneTimeTearDown]
-    //public static void TearDown()
-    //{
-    //  driver.Quit();
-    //}
+    [OneTimeTearDown]
+    public static void TearDown()
+    {
+      Driver.Quit();
+    }
   }
 }
 

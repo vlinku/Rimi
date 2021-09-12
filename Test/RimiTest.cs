@@ -8,39 +8,38 @@ namespace Rimi.Test
 
     [Test]
 
-    public static void TestDovanuKortelesTaisykles ()
-    {
-      _rimiHomePage.NavigateToPage(); 
-      _rimiHomePage.CloseCookies();
-      _rimiHomePage.PasirinktiDaugiauMygtuka();
-      _rimiHomePage.Patikrinti9Taisykle("Dovanų kortelė į pinigus nekeičiama.");
-    }
-     
-   [Test]
-   public static void RimiPrancuzuParduotuve ()
+    public static void TestGiftCardRule()
     {
       _rimiHomePage.NavigateToPage();
       _rimiHomePage.CloseCookies();
-      _rimiParduotuvePage.SelectParduotuves();
-      _rimiParduotuvePage.IeskotiParduotuves("Kaunas");
-      _rimiParduotuvePage.CheckShop("Rimi Prancūzų");
-      
+      _rimiHomePage.CheckButtonExpandMenu();
+      _rimiHomePage.Check9Rule("Dovanų kortelė į pinigus nekeičiama.");
     }
 
     [Test]
-    public static void RimiProductPrice ()
+    public static void RimiFrenchShopTest()
+    {
+      _rimiHomePage.NavigateToPage();
+      _rimiHomePage.CloseCookies();
+      _rimiParduotuvePage.SelectShops();
+      _rimiParduotuvePage.SearchShops("Kaunas");
+      _rimiParduotuvePage.CheckShop("Rimi Prancūzų");
+    }
+
+    [Test]
+    public static void RimiEShopBreadTest()
     {
       _rimiHomePage.NavigateToPage();
       _rimiHomePage.CloseCookies();
       _rimiHomePage.NavigateToEShop();
-      _rimiEShopPricePage.stayOnPage();
-     _rimiEShopPricePage.EShopSearch("Pienas");
+      _rimiEShopPricePage.EShopSearch("Duona");
+      _rimiEShopPricePage.VegetarianBread();
+      _rimiEShopPricePage.AssertBreadPrice("1,69 €");
 
     }
 
     [Test]
-
-    public static void RimiMilkPriceCheck ()
+    public static void RimiMilkPriceTest()
     {
       _rimiHomePage.NavigateToPage();
       _rimiHomePage.CloseCookies();
@@ -48,6 +47,17 @@ namespace Rimi.Test
       _rimiMilkPricePage.RimiSearch("Pienas");
       _rimiMilkPricePage.MilkSelect();
       _rimiMilkPricePage.FirstMilkSelectionGrid();
+      _rimiMilkPricePage.checkPrice(2, 100);
+    }
+
+    [Test]
+    public static void RimiEShopDropDownListTest()
+    {
+      _rimiHomePage.NavigateToPage();
+      _rimiHomePage.CloseCookies();
+      _rimiHomePage.NavigateToEShop();
+      _rimiEShopProducList.DropDownSelection();
+      _rimiEShopProducList.CheckFruitName("Bananai");
 
     }
 

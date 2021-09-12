@@ -1,12 +1,11 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace Rimi.Page
 {
@@ -19,31 +18,25 @@ namespace Rimi.Page
 
     IReadOnlyCollection<IWebElement> MilkSelectionGrid => Driver.FindElements(By.CssSelector(".product-grid__item"));
     IWebElement firstSelectionResult => MilkSelectionGrid.ElementAt(0).FindElement(By.CssSelector(".card__url.js-gtm-eec-product-click"));
-    
-    private IWebElement EurosPrice => Driver.FindElement(By.XPath("//*[@id='main']/section/div[1]/div/div[2]/section[1]/div/div[1]/div[2]/div[1]/div[1]/span"));
-    private IWebElement EuroCentsPrice => Driver.FindElement(By.XPath("//*[@id='main']/section/div[1]/div/div[2]/section[1]/div/div[1]/div[2]/div[1]/div[1]/div/sup"));
-    
-    
-    // //input[contains(@class, 'form-field__input')] - Xpath class ;  //input[@id='email'] - Xpath id;  //input[@name='email'] - name;
-    
-    
+
+    private string EurosPrice => Driver.FindElement(By.CssSelector(".price > span")).Text;
+    private string EuroCentsPrice => Driver.FindElement(By.CssSelector(".price > div > sup")).Text;
+
+
     public RimiMilkPricePage(IWebDriver webdriver) : base(webdriver) { }
 
-    public void RimiSearchProductOpen ()
+    public void RimiSearchProductOpen()
     {
       RimiOpenSearch.Click();
     }
-    
-    public void RimiSearch (string text)
+
+    public void RimiSearch(string text)
     {
-  
-     RimiSearchMilk.Clear();
+      RimiSearchMilk.Clear();
       RimiSearchMilk.SendKeys(text);
       Actions PressEnter = new Actions(Driver);
       PressEnter.SendKeys(Keys.Enter);
       PressEnter.Build().Perform();
-
-
     }
 
     public void MilkSelect()
@@ -53,15 +46,16 @@ namespace Rimi.Page
 
     public void FirstMilkSelectionGrid()
     {
+      GetWait().Until(ExpectedConditions.ElementToBeClickable(firstSelectionResult));
       firstSelectionResult.Click();
     }
 
+    public void checkPrice(int Euro, int Cents)
+    {
+      Assert.IsTrue(Euro > Int32.Parse(EurosPrice), "Euro price do not match");
+      Assert.IsTrue(Cents > Int32.Parse(EuroCentsPrice), "Euro cents price do not match");
+    }
 
-    //public void checkPrice() 
-    //{
-    //  Assert.IsTrue(EurosPrice && EuroCentsPrice  , firstShopResultSelected, "Shop names do not match"); 
-    //} 
-    
 
   }
 }

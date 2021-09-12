@@ -1,17 +1,16 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace Rimi.Page
 {
   public class RimiHomePage : BasePage
   {
     private const string PageAddress = "https://www.rimi.lt/";
-    private IWebElement cookieButton => Driver.FindElement(By.Id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"));
-    private IWebElement SelectDaugiau => Driver.FindElement(By.XPath("//html/body/header/div[1]/div/div/div[2]/ul/li[1]/div"));
-    private IWebElement SelectDovanuKortele => Driver.FindElement(By.XPath("/html/body/header/div[1]/div/div/div[2]/ul/li[1]/ul/li[2]"));
+    private IWebElement SelectExpandMenu => Driver.FindElement(By.XPath("//html/body/header/div[1]/div/div/div[2]/ul/li[1]/div"));
+    private IWebElement SelectGiftCard => Driver.FindElement(By.XPath("/html/body/header/div[1]/div/div/div[2]/ul/li[1]/ul/li[2]"));
 
-    private IWebElement Korteles9Taisykle => Driver.FindElement(By.XPath("/html/body/main/section/div/div/div/ol/li[9]"));
+    private IWebElement Cards9Rule => Driver.FindElement(By.XPath("/html/body/main/section/div/div/div/ol/li[9]"));
 
     private IWebElement EShop => Driver.FindElement(By.CssSelector(".header__ecom-link.gtm"));
 
@@ -26,24 +25,30 @@ namespace Rimi.Page
 
     public void CloseCookies()
     {
-      GetWait().Until(ExpectedConditions.ElementIsVisible(By.Id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")));
-      cookieButton.Click();
+      Cookie myCookie = new Cookie("CookieConsent", 
+        "{stamp:%27AiTpWRI9P6CvNrDXXdPvcUgT54mwMgkxVW8roehFL1tEQq6Cs3z/ow==%27%2Cnecessary:true%2Cpreferences:true%2Cstatistics:true%2Cmarketing:true%2Cver:6%2Cutc:1631444204870%2Cregion:%27lt%27}",
+        "www.rimi.lt", 
+        "/", 
+        DateTime.Now.AddDays(7));
+      Driver.Manage().Cookies.AddCookie(myCookie);
+      Driver.Navigate().Refresh();
+    }
+    
+    public void Check9Rule(string result)
+    {
+      Assert.IsTrue(Cards9Rule.Text.Contains(result) , "Rule is incorrect!");
     }
 
-    
-    public void Patikrinti9Taisykle(string result)
+    public void CheckButtonExpandMenu()
     {
-      Assert.IsTrue(Korteles9Taisykle.Text.Contains(result) , "Rule is incorrect!");
-    }
-    public void PasirinktiDaugiauMygtuka()
-    {
-      SelectDaugiau.Click();
-      SelectDovanuKortele.Click();
+      SelectExpandMenu.Click();
+      SelectGiftCard.Click();
     }
 
     public void NavigateToEShop() 
     {
-      EShop.Click(); 
+      EShop.Click();
+      Driver.SwitchTo().Window(Driver.WindowHandles[1]);
     }
 
   }
