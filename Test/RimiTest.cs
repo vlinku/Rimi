@@ -23,6 +23,7 @@ namespace Rimi.Test
       _rimiHomePage.CloseCookies();
       _rimiParduotuvePage.SelectShops();
       _rimiParduotuvePage.SearchShops("Kaunas");
+      _rimiParduotuvePage.waitToLoad();
       _rimiParduotuvePage.CheckShop("Rimi Prancūzų");
     }
 
@@ -34,7 +35,7 @@ namespace Rimi.Test
       _rimiHomePage.NavigateToEShop();
       _rimiEShopPricePage.EShopSearch("Duona");
       _rimiEShopPricePage.VegetarianBread();
-      _rimiEShopPricePage.AssertBreadPrice("1,69 €");
+      _rimiEShopPricePage.AssertBreadPrice("1,84 €");
 
     }
 
@@ -53,12 +54,8 @@ namespace Rimi.Test
     [Test]
     public static void RimiEShopDropDownListTest()
     {
-      _rimiHomePage.NavigateToPage();
-      _rimiHomePage.CloseCookies();
-      _rimiHomePage.NavigateToEShop();
       _rimiEShopProducList.DropDownSelection();
       _rimiEShopProducList.CheckFruitName("Bananai");
-
     }
 
 
